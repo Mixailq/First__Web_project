@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Visual C++ Development</title>
+    <style>
+        body{
+            font-family:'Segoe UI',Tahoma,Verdana, Geneva, sans-serif;
+            line-height:1.6;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            background-color: #f5f5f5;
+        }
+
+        header{
+            background-color: #00599c;
+            color:white;
+            padding: 1rem 0;
+            text-align:center;
+        }
+
+        .container{
+            width: 80%;
+            margin:auto;
+            overflow:hidden;
+            padding:20px;
+            background:white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1,h2{
+            color: #00599c;
+        }
+
+        .code-block{
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-left: 4px solid #00599c;
+            font-family:'Consolas','Courier New',monospace;
+            overflow-x: auto;
+        }
+
+        footer{
+            text-align: center;
+            padding: 20px;
+            background-color: #00599c;
+            color: white;
+            margin-top: 20px;
+        }
+
+        .nav{
+            background-color: #333;
+            overflow: hidden;
+        }
+
+        .nav a{
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        .nav a:hover{
+            background-color: #ddd;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Visual Studio Development</h1>
+        <p>Your guide to Microsoft Visual C++ programing</p>
+    </header>
+
+    <div class="nav">
+        <a herf="#overview">Overview</a>
+        <a herf="#setup">Setup</a>
+        <a herf="#examples">Examples</a>
+        <a herf="#recources">Recources</a>
+    </div>
+
+    <div class="container">
+        <section id="overview">
+            <h2>Overview</h2>
+            <p>Visual C++ is a powerful integrated development environment(IDE) form Microsoft for 
+            C,C++ and c++/CLI programming. It's part of Microsoft Visual Studio 
+            and provides tools for developing Windows applications, games, and more.</p>
+
+            <p>Key feachers include:</p>
+            <ul>
+                <li>Advanced code edditor with InteliSense</li>
+                <li>Powerfull debugger</li>
+                <li>Integrated compiler and build tools</li>
+                <li>GUI designer for Windows applications</li>
+                <li>Support for modern C++ standards</li>
+            </ul>
+        </section>
+
+        <section id="setup">
+            <h2>Setting up Visual C++</h2>
+            <p>To get started with visual c++ development:</p>
+            <ol>
+                <li>Download and instal<a herf="https://visualstudio.microsoft.com" 
+                                          target="_blank">Visual Studio</a></li>
+                <li>Select the "Desktop development with C++" workload during installation</li>
+                <li>Launch Visual Studio and create a new project</li>
+                <li>Select a C++ project template (Console App,Windows Desktop,etc.</li>
+                <li>Starting code!</li>
+            </ol>
+        </section>
+
+        <section id="examples">
+            <h2>Example code</h2>
+            <p>Here's a simple "Hellow World" example in C++</p>
+            <div class="code-block">
+                #include &lt;iostream&gt;
+
+                int main() {
+                    std::cout << "Hellow World!" << std::endl;
+                    return 0;
+                }
+            </div>
+
+            <p>A basic Windows GUI application:</p>
+            <div class="code-block">
+                #include &lt;Windows.h&gt;
+
+                LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+
+                int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
+                            LPSTR lpCmdLine, int nCmdShow) {
+                    // Register the window class
+                    const wchar_t CLASS_NAME[] = L"Sample Window Class";
+
+                    WNDCLASS wc = { };
+                    wc.lpfnWndProc = WindowProc;
+                    wc.hInstance = hInstance;
+                    wc.lpszClassName = CLASS_NAME;
+
+                    RegisterClass(&wc);
+
+                    // Create the window
+                    HWND hwnd = CreateWindowEx(
+                        0, CLASS_NAME, L"Learn to Program Windows",
+                        WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT,
+                        CW_USEDEFAULT, CW_USEDEFAULT, NULL, NULL, hInstance, NULL);
+
+                    if (hwnd == NULL) return 0;
+
+                    ShowWindow(hwnd, nCmdShow);
+
+                    // Run the message loop
+                    MSG msg = { };
+                    while (GetMessage(&msg, NULL, 0, 0)) {
+                    TranslateMessage(&msg);
+                    DispatchMessage(&msg);
+                    }
+
+                        return 0;
+                }
+                LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam) {
+                
+                    switch (uMsg) {
+                        case WM_DESTROY:
+                            PostQuitMessage(0);
+                            return 0;
+                        case WM_PAINT: {
+                            PAINTSTRUCT ps;
+                            HDC hdc = BeginPaint(hwnd, &ps);
+                            FillRect(hdc, &ps.rcPaint, (HBRUSH)(COLOR_WINDOW+1));
+                            EndPaint(hwnd, &ps);
+                        } return 0;
+                    }
+                    return DefWindowProc(hwnd, uMsg, wParam, lParam);
+                }
+            </div>
+        </section>
+        <section id="Resorces">
+            <h2>Learning Resources</h2>
+            <ul>
+                <li><a herf="https://docs.microsoft.com/en-us/cpp" target="_blank">Microsoft C++ Documentation</a></li>
+                <li><a herf="https://isocpp.org/" target="_blank">ISO C++ Foundation</a></li>
+            </ul>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Visaul C++ Development Page</p>
+    </footer>
+</body>
+</html>
